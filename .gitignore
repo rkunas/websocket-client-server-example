@@ -1,0 +1,13 @@
+
+/.idea/
+Würde .gitignore löschen
+Würde .idea/compiler.xml löschen
+Würde .idea/misc.xml löschen
+Würde .idea/modules.xml löschen
+Würde .idea/websocket-client-server-example.iml löschen
+Würde .idea/workspace.xml löschen
+Würde client/client.iml löschen
+Würde client/src/ löschen
+Würde server/server.iml löschen
+Würde server/src/ löschen
+.idea
