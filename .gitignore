@@ -11,3 +11,5 @@ Würde client/src/ löschen
 Würde server/server.iml löschen
 Würde server/src/ löschen
 .idea
+/server/server.iml
+/client/client.iml
