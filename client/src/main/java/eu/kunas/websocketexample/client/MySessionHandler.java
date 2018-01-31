@@ -9,7 +9,6 @@ import java.lang.reflect.Type;
 
 /**
  * Created by ramazan on 31.01.18.
-
  */
 
 
@@ -19,6 +18,8 @@ public class MySessionHandler extends StompSessionHandlerAdapter {
         session.subscribe("/topic/greetings", this);
         session.send("/app/hello", "{\"name\":\"Client\"}".getBytes());
 
+
+        System.out.println("New session: {} " + session.getSessionId());
     }
 
     @Override
@@ -33,5 +34,6 @@ public class MySessionHandler extends StompSessionHandlerAdapter {
 
     @Override
     public void handleFrame(StompHeaders headers, Object payload) {
+        System.out.println("Received: {} " + ((Greeting) payload).getContent());
     }
 }
