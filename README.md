@@ -7,4 +7,4 @@ The Client Spring Boot is Running with port 8891
 
 The Server Spring Boot is Running with port 8892
 
-These Ports are defined in the two application.properties
+These Ports are defined in the two application.properties Files.
