@@ -13,6 +13,6 @@ Ok what now ?
 
 1. Clone the Project.
 
-2. Open The Projects im some IDE
+2. Open The Projects in some IDE
 
 3. Start both Spring Boot Applications
