@@ -8,3 +8,11 @@ The Client Spring Boot is Running with port 8891
 The Server Spring Boot is Running with port 8892
 
 These Ports are defined in the two application.properties Files.
+
+Ok what now ?
+
+1. Clone the Project.
+
+2. Open The Projects im some IDE
+
+3. Start both Spring Boot Applications
