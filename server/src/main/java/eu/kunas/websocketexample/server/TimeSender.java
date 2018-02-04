@@ -14,7 +14,9 @@ import java.time.format.DateTimeFormatter;
 @Component
 @Slf4j
 public class TimeSender {
+
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
+
     @Autowired
     private SimpMessagingTemplate broker;
 
