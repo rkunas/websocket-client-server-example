@@ -25,7 +25,7 @@ public class TimeSender {
         this.broker = broker;
     }
 
-    @Scheduled(fixedRate = 5000)
+    //@Scheduled(fixedRate = 5000)
     public void run() {
         String time = LocalTime.now().format(TIME_FORMAT);
 

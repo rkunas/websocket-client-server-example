@@ -20,15 +20,21 @@ public class MySessionHandler extends StompSessionHandlerAdapter {
     @Override
     public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
 
+        this.session = session;
         session.subscribe("/topic/greetings", this);
+        session.send("/app/hello", "{\"name\":\"Client\"}".getBytes());
 
 
     }
 
     public void send(String message) {
-        HelloMessage helloMessage = new HelloMessage();
-        helloMessage.setName(message);
-        session.send("/app/hello", helloMessage);
+
+        synchronized(session) {
+
+
+        }
+
+
     }
 
 

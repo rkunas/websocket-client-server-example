@@ -17,21 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Slf4j
 public class Server {
 
-    @Autowired
-    private SimpMessagingTemplate broker;
-
-    @MessageMapping("/hello")
-    @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message) throws Exception {
-        log.info("Received hello: {}", message.getName());
-        return new Greeting("Hello, " + message.getName() + "!");
-    }
-
-    @RequestMapping(path = "/callclient",method = RequestMethod.GET)
-    public void call(){
-        broker.convertAndSend("/topic/greetings", new Greeting("Yipeeeeeeaiyeee"));
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(Server.class, args);
     }

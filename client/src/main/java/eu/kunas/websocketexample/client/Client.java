@@ -3,6 +3,8 @@ package eu.kunas.websocketexample.client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.StompSessionHandler;
 import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
@@ -19,17 +21,20 @@ import org.springframework.web.socket.messaging.WebSocketStompClient;
  */
 @Controller
 @EnableAutoConfiguration
+@ComponentScan("eu.kunas.websocketexample.client")
 public class Client {
 
-    @Autowired
-    private MySessionHandler mySessionHandler;
+    WebSocketStompClient stompClient;
+
+   @Autowired
+   private MySessionHandler mySessionHandler;
 
     @RequestMapping("/connect")
     @ResponseBody
     public String call() {
 
         WebSocketClient webSocketClient = new StandardWebSocketClient();
-        WebSocketStompClient stompClient = new WebSocketStompClient(webSocketClient);
+        stompClient = new WebSocketStompClient(webSocketClient);
         stompClient.setMessageConverter(new MappingJackson2MessageConverter());
         stompClient.setTaskScheduler(new ConcurrentTaskScheduler());
 
@@ -40,6 +45,7 @@ public class Client {
     }
 
     @RequestMapping(path = "/callserver", method = RequestMethod.GET)
+    @ResponseBody
     public String callServer(){
 
         mySessionHandler.send("Client is calling");
