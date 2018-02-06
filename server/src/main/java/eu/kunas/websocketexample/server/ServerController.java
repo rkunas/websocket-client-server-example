@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @Slf4j
-public class GreetingController {
+public class ServerController {
 
     @Autowired
     private SimpMessagingTemplate broker;

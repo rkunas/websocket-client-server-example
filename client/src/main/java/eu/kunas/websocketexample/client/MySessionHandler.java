@@ -22,21 +22,16 @@ public class MySessionHandler extends StompSessionHandlerAdapter {
 
         this.session = session;
         session.subscribe("/topic/greetings", this);
-        session.send("/app/hello", "{\"name\":\"Client\"}".getBytes());
-
 
     }
 
     public void send(String message) {
-
         synchronized(session) {
-
-
+            HelloMessage helloMessage = new HelloMessage();
+            helloMessage.setName("Client");
+            session.send("/app/hello", helloMessage);
         }
-
-
     }
-
 
     @Override
     public void handleException(StompSession session, StompCommand command, StompHeaders headers, byte[] payload, Throwable exception) {
