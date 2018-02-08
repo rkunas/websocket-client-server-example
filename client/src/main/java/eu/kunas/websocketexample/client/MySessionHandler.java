@@ -1,5 +1,6 @@
 package eu.kunas.websocketexample.client;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
@@ -7,12 +8,15 @@ import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ramazan on 31.01.18.
  */
 
 @Component
+@Slf4j
 public class MySessionHandler extends StompSessionHandlerAdapter {
 
     private StompSession session;
@@ -21,15 +25,23 @@ public class MySessionHandler extends StompSessionHandlerAdapter {
     public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
 
         this.session = session;
-        session.subscribe("/topic/greetings", this);
+        session.subscribe("/queue/greetings", this);
 
     }
 
     public void send(String message) {
         synchronized(session) {
-            HelloMessage helloMessage = new HelloMessage();
-            helloMessage.setName("Client");
-            session.send("/app/hello", helloMessage);
+
+            List<BusinessObject> list = new ArrayList<>();
+
+            for(int i=0; i<10;i++){
+                BusinessObject businessObject = new BusinessObject();
+                businessObject.setName( i + " Business");
+                businessObject.setBid(i);
+                list.add(businessObject);
+            }
+
+            session.send("/app/hello", list);
         }
     }
 
@@ -40,11 +52,11 @@ public class MySessionHandler extends StompSessionHandlerAdapter {
 
     @Override
     public Type getPayloadType(StompHeaders headers) {
-        return Greeting.class;
+        return List.class;
     }
 
     @Override
     public void handleFrame(StompHeaders headers, Object payload) {
-        System.out.println("Received: {} " + ((Greeting) payload).getContent());
+        log.debug("Received Business Objects:  " + ((List<BusinessObject>) payload).size());
     }
 }
