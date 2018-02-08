@@ -3,12 +3,14 @@ package eu.kunas.websocketexample.server;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +25,7 @@ public class ServerController {
     @Autowired
     private SimpMessagingTemplate broker;
 
-    @MessageMapping("/hello")
+    @MessageMapping("/businessobjects")
     @SendTo("/queue/greetings")
     public List<BusinessObject> greeting(List<BusinessObject> message) throws Exception {
         log.debug("Received BusinsessObjects: " + message.size());

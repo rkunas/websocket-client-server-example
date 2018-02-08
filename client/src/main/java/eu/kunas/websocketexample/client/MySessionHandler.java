@@ -41,7 +41,7 @@ public class MySessionHandler extends StompSessionHandlerAdapter {
                 list.add(businessObject);
             }
 
-            session.send("/app/hello", list);
+            session.send("/app/businessobjects", list);
         }
     }
 
